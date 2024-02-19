@@ -4,5 +4,5 @@
 /**
  * 
  */
-module atm {
+module zcoin {
 }
