@@ -4,5 +4,5 @@
 /**
  * 
  */
-module zcoin {
+module virtualclassroom {
 }
