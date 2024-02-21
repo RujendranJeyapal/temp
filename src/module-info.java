@@ -4,5 +4,5 @@
 /**
  * 
  */
-module virtualclassroom {
+module parkinglot {
 }
