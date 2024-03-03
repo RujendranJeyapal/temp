@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset="ISO-8859-1">
+     <title>chessboard</title>
+     <link rel="stylesheet" type="text/css" href="Style.css">
+     <script src="Chess.js"></script>
+     <h1 style="color:red">MASTER CHESSBOARD</h1>
+
+</head>
+
+<body>
+     <table id="fullboard">
+
+          <tr>
+               <td>
+               </td>
+               <td id="alps">a</td>
+               <td id="alps"> b</td>
+               <td id="alps"> c</td>
+               <td id="alps"> d</td>
+               <td id="alps"> e</td>
+               <td id="alps"> f</td>
+               <td id="alps"> g</td>
+               <td id="alps"> h</td>
+          </tr>
+          <tr>
+               <td>8</td>
+               <td> <button id="a8" name="B_R" onclick="selectBox('a8')">&#9820;</button> </td>
+               <td> <button class="blackbox" id="b8" name="B_N" onclick="selectBox('b8')">&#9822;</button></td>
+               <td> <button id="c8" name="B_B" onclick="selectBox('c8')">&#9821;</button> </td>
+               <td> <button class="blackbox" id="d8" name="B_Q" onclick="selectBox('d8')">&#9819;</button></td>
+               <td> <button id="e8" name="B_K" onclick="selectBox('e8')">&#9818;</button></td>
+               <td> <button class="blackbox" id="f8" name="B_B" onclick="selectBox('f8')">&#9821;</button></td>
+               <td> <button id="g8" name="B_N" onclick="selectBox
+                    ('g8')">&#9822;</button></td>
+               <td> <button class="blackbox" id="h8" name="B_R" onclick="selectBox('h8')">&#9820;</button></td>
+               <td>8</td>
+
+          </tr>
+
+ 
+ 
+ 
+ 
+          <tr>
+               <td>7</td>
+               <td> <button class="blackbox" id="a7" name="B_P"  onclick="selectBox('a7')">&#9823;</button></td>
+               <td> <button id="b7" name="B_P"  onclick="selectBox('b7')">&#9823;</button></td>
+               <td> <button class="blackbox" id="c7" name="B_P"  onclick="selectBox('c7')">&#9823;</button></td>
+               <td> <button id="d7" name="B_P"  onclick="selectBox('d7')">&#9823;</button></td>
+               <td> <button class="blackbox" id="e7" name="B_P"  onclick="selectBox('e7')">&#9823;</button></td>
+               <td> <button id="f7" name="B_P"  onclick="selectBox('f7')">&#9823;</button></td>
+               <td> <button class="blackbox" id="g7" name="B_P"  onclick="selectBox('g7')">&#9823;</button></td>
+               <td> <button id="h7" name="B_P"  onclick="selectBox('h7')">&#9823;</button></td>
+               <td>7</td>
+
+          </tr>
+
+          <tr>
+               <td>6</td>
+               <td> <button id="a6" name="" onclick="selectBox('a6')"></button> </td>
+               <td> <button class="blackbox" id="b6" name="" onclick="selectBox('b6')"></button></td>
+               <td> <button id="c6" name="" onclick="selectBox('c6')"></button> </td>
+               <td> <button class="blackbox" id="d6" name="" onclick="selectBox('d6')"></button></td>
+               <td> <button id="e6" name="" onclick="selectBox('e6')"></button></td>
+               <td> <button class="blackbox" id="f6" name="" onclick="selectBox('f6')"></button></td>
+               <td> <button id="g6" name="" onclick="selectBox('g6')"></button></td>
+               <td> <button class="blackbox" id="h6" name="" onclick="selectBox('h6')"></button></td>
+               <td>6</td>
+
+          </tr>
+
+          <tr>
+               <td>5</td>
+               <td> <button class="blackbox" id="a5" name=""  onclick="selectBox('a5')"></button></td>
+               <td> <button id="b5" name=""  onclick="selectBox('b5')"></button></td>
+               <td> <button class="blackbox" id="c5" name=""  onclick="selectBox('c5')"></button></td>
+               <td> <button id="d5" name=""  onclick="selectBox('d5')"></button></td>
+               <td> <button class="blackbox" id="e5" name=""  onclick="selectBox('e5')"></button></td>
+               <td> <button id="f5" name=""  onclick="selectBox('f5')"></button></td>
+               <td> <button class="blackbox" id="g5" name=""  onclick="selectBox('g5')"></button></td>
+               <td> <button id="h5" name=""  onclick="selectBox('h5')"></button></td>
+               <td>5</td>
+          </tr>
+
+
+
+          <tr>
+               <td>4</td>
+               <td> <button id="a4" name  onclick="selectBox('a4')"></button> </td>
+               <td> <button class="blackbox" id="b4" name="" onclick="selectBox('b4')"></button></td>
+               <td> <button id="c4" name="" onclick="selectBox('c4')"></button> </td>
+               <td> <button class="blackbox" id="d4" name="" onclick="selectBox('d4')"></button></td>
+               <td> <button id="e4" name="" onclick="selectBox('e4')"></button></td>
+               <td> <button class="blackbox" id="f4" name="" onclick="selectBox('f4')"></button></td>
+               <td> <button id="g4" name="" onclick="selectBox('g4')"></button></td>
+               <td> <button class="blackbox" id="h4" name="" onclick="selectBox('h4')"></button></td>
+               <td>4</td>
+
+          </tr>
+
+          <tr>
+               <td>3</td>
+               <td> <button class="blackbox" id="a3" name="" onclick="selectBox('a3')"></button></td>
+               <td> <button id="b3" name="" onclick="selectBox('b3')"></button></td>
+               <td> <button class="blackbox" id="c3" name="" onclick="selectBox('c3')"></button></td>
+               <td> <button id="d3" name="" onclick="selectBox('d3')"></button></td>
+               <td> <button class="blackbox" id="e3" name="" onclick="selectBox('e3')"></button></td>
+               <td> <button id="f3" name="" onclick="selectBox('f3')"></button></td>
+               <td> <button class="blackbox" id="g3" name="" onclick="selectBox('g3')"></button></td>
+               <td> <button id="h3" name="" onclick="selectBox('h3')"></button></td>
+               <td>3</td>
+
+          </tr>
+
+
+          <tr>
+               <td>2</td>
+               <td> <button id="a2" name="W_P" onclick="selectBox('a2')">&#9817;</button> </td>
+               <td> <button class="blackbox" id="b2" name="W_P" onclick="selectBox('b2')">&#9817;</button></td>
+               <td> <button id="c2" name="W_P" onclick="selectBox('c2')">&#9817;</button> </td>
+               <td> <button class="blackbox" id="d2" name="W_P" onclick="selectBox('d2')">&#9817;</button></td>
+               <td> <button id="e2" name="W_P" onclick="selectBox('e2')">&#9817;</button></td>
+               <td> <button class="blackbox" id="f2" name="W_P" onclick="selectBox('f2')">&#9817;</button></td>
+               <td> <button id="g2" name="W_P" onclick="selectBox('g2')">&#9817;</button></td>
+               <td> <button class="blackbox" id="h2" name="W_P" onclick="selectBox('h2')">&#9817;</button></td>
+               <td>2</td>
+
+          </tr>
+
+
+          <tr>
+               <td>1</td>
+               <td> <button class="blackbox" id="a1" name="W_R" onclick="selectBox('a1')">&#9814;</button></td>
+               <td> <button id="b1" name="W_N" onclick="selectBox('b1')">&#9816;</button></td>
+               <td> <button class="blackbox" id="c1" name="W_B" onclick="selectBox('c1')">&#9815;</button></td>
+               <td> <button id="d1" name="W_Q" onclick="selectBox('d1')">&#9813;</button></td>
+               <td> <button class="blackbox" id="e1" name="W_K" onclick="selectBox('e1')">&#9812;</button></td>
+               <td> <button id="f1" name="W_B" onclick="selectBox('f1')">&#9815;</button></td>
+               <td> <button class="blackbox" id="g1" name="W_N" onclick="selectBox('g1')">&#9816;</button></td>
+               <td> <button id="h1" name="W_R" onclick="selectBox('h1')">&#9814;</button></td>
+               <td>1</td>
+
+          </tr>
+
+
+          <tr>
+               <td></td>
+               <td id="alps">a</td>
+               <td id="alps"> b</td>
+               <td id="alps"> c</td>
+               <td id="alps"> d</td>
+               <td id="alps"> e</td>
+               <td id="alps"> f</td>
+               <td id="alps"> g</td>
+               <td id="alps"> h</td>
+          </tr>
+
+
+
+     </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

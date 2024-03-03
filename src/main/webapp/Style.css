@@ -1,0 +1,59 @@
+@charset "ISO-8859-1";
+
+
+button
+{
+	
+	border: 1px solid black;
+	width:1.25cm;
+	height:1.25cm;
+	background-color:white;
+    font-size:30px;
+	
+}
+
+
+
+#container
+{
+	display:flex;
+    margin:auto;
+	border: 2px solid black;
+  
+	width:15cm;
+	height:15cm;
+	
+}
+
+
+#alps
+{
+	text-align:center;
+	
+}
+
+
+h1
+{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#fullboard
+{
+	display:flex;
+    margin:auto;
+   padding-left:15px;
+	border: 2px solid rgb(119, 116, 116);
+   background-color:rgb(226, 230, 231);
+	width:12.5cm;
+	height:12.8cm;
+}
+
+
+
+
+.blackbox
+{
+	background-color:grey;
+}
