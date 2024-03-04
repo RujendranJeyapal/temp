@@ -609,6 +609,9 @@ function getBishopMoves(position, coin, flag) {
             if ((coin.startsWith("W") && isWhiteKingCheck()) || (coin.startsWith("B") && isBlackKingCheck())) {
                document.getElementById(position).name = coin;
                document.getElementById(toPosition).name = toCoin;
+               if (isOppositeColourCoinHere(coin, toPosition)) {
+                  break;
+               }
                col = String.fromCharCode(col.charCodeAt(0) + colMoves[i]);
                row = parseInt(row + rowMoves[i]);
                continue;
@@ -667,6 +670,9 @@ function getRookMoves(position, coin, flag) {
             if ((coin.startsWith("W") && isWhiteKingCheck()) || (coin.startsWith("B") && isBlackKingCheck())) {
                document.getElementById(position).name = coin;
                document.getElementById(toPosition).name = toCoin;
+               if (isOppositeColourCoinHere(coin, toPosition)) {
+                  break;
+               }
                col = String.fromCharCode(col.charCodeAt(0) + colMoves[i]);
                row = parseInt(row + rowMoves[i]);
                continue;
