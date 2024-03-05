@@ -153,7 +153,7 @@ function moveCoins(toPosition) {
                document.getElementById("a8").name = "";
 
                document.getElementById("d8").innerHTML = blackRook;
-               document.getElementById("d8").name = "W_R";
+               document.getElementById("d8").name = "B_R";
                blackRookMovementAtA8++;
             }
 
