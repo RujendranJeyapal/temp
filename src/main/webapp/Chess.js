@@ -975,14 +975,17 @@ function checkStatus(lastMovedCoin) {
       location.reload();
    }
 
-   else if (lastMovedCoin.startsWith("W")) {
+   if (checkPosition != "") {
+      document.getElementById(checkPosition).style.backgroundColor = '';
+      checkPosition = "";
+   }
 
+   if (lastMovedCoin.startsWith("W")) {
+
+     
 
       if (!isBlackKingCheck()) {
-         if (checkPosition != "") {
-            document.getElementById(checkPosition).style.backgroundColor = '';
-            checkPosition = "";
-         }
+        
 
          if (isBlackKingStaleMate()) {
             alert("Stalemate");
@@ -1004,13 +1007,10 @@ function checkStatus(lastMovedCoin) {
    }
 
 
-   else if (lastMovedCoin.startsWith("B")) {
+    if (lastMovedCoin.startsWith("B")) {
 
       if (!isWhiteKingCheck()) {
-         if (checkPosition != "") {
-            document.getElementById(checkPosition).style.backgroundColor = '';
-            checkPosition = "";
-         }
+       
          if (isWhiteKingStaleMate()) {
             alert("Stalemate");
             location.reload();
