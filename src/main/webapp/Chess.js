@@ -1,5 +1,6 @@
 
 var lastSelecMoves = [];
+var attackingCoinPositions = [];
 var isWhiteMove = true;
 var isBlackMove = false;
 var lastSelectPosition = "";
@@ -47,11 +48,16 @@ function selectBox(position) {
          else {
 
             var moves = getMoves(position, coin, true);
-            for (var i = 0; i < moves.length; i++) {
-               document.getElementById(moves[i]).style.backgroundColor = 'green';
+
+            if (moves.length > 0) {
+
+               document.getElementById(position).style.backgroundColor = 'violet';
+               for (var i = 0; i < moves.length; i++) {
+                  document.getElementById(moves[i]).style.backgroundColor = 'green';
+               }
+               lastSelecMoves = moves;
+               lastSelectPosition = position;
             }
-            lastSelecMoves = moves;
-            lastSelectPosition = position;
          }
       }
       else {
@@ -72,6 +78,7 @@ function selectBox(position) {
 
 
 function clearLight() {
+   document.getElementById(lastSelectPosition).style.backgroundColor = '';
    for (var i = 0; i < lastSelecMoves.length; i++) {
       document.getElementById(lastSelecMoves[i]).style.backgroundColor = '';
    }
@@ -191,7 +198,7 @@ function moveCoins(toPosition) {
       checkStatus(coin);
    }
 
-      
+
 }
 
 function getMoves(position, coin, flag) {
@@ -239,7 +246,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-            if (!isWhiteKingCheck()) {
+            if (!isWhiteKingCheck(false)) {
                movingPlaces.push(toPosition);
             }
 
@@ -262,7 +269,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-            if (!isWhiteKingCheck()) {
+            if (!isWhiteKingCheck(false)) {
                movingPlaces.push(col + "" + 4);
             }
 
@@ -296,7 +303,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-               if (!isWhiteKingCheck()) {
+               if (!isWhiteKingCheck(false)) {
                   movingPlaces.push(toPosition);
                }
 
@@ -330,7 +337,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-            if (!isBlackKingCheck()) {
+            if (!isBlackKingCheck(false)) {
                movingPlaces.push(toPosition);
             }
 
@@ -351,7 +358,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-            if (!isBlackKingCheck()) {
+            if (!isBlackKingCheck(false)) {
                movingPlaces.push(col + "" + 5);
             }
 
@@ -386,7 +393,7 @@ function getPawnMoves(position, coin, flag) {
 
 
 
-               if (!isBlackKingCheck()) {
+               if (!isBlackKingCheck(false)) {
                   movingPlaces.push(toPosition);
                }
 
@@ -437,7 +444,7 @@ function getKingMoves(position, coin, flag) {
 
                whiteKingPosition = toPosition
 
-               if (!isWhiteKingCheck()) {
+               if (!isWhiteKingCheck(false)) {
                   movingPlaces.push(toPosition);
                }
                whiteKingPosition = position
@@ -453,7 +460,7 @@ function getKingMoves(position, coin, flag) {
 
                blackKingPosition = toPosition
 
-               if (!isBlackKingCheck()) {
+               if (!isBlackKingCheck(false)) {
                   movingPlaces.push(toPosition);
                }
                blackKingPosition = position
@@ -479,11 +486,11 @@ function getKingMoves(position, coin, flag) {
             && whiteRookMovementAtH1 == 0) {
             whiteKingPosition = "f1"
 
-            if (!isWhiteKingCheck()) {
+            if (!isWhiteKingCheck(false)) {
 
                whiteKingPosition = "g1";
 
-               if (!isWhiteKingCheck()) {
+               if (!isWhiteKingCheck(false)) {
                   movingPlaces.push("g1");
                }
                whiteKingPosition = "f1";
@@ -500,11 +507,11 @@ function getKingMoves(position, coin, flag) {
             && whiteRookMovementAtA1 == 0) {
             whiteKingPosition = "d1"
 
-            if (!isWhiteKingCheck()) {
+            if (!isWhiteKingCheck(false)) {
 
                whiteKingPosition = "c1";
 
-               if (!isWhiteKingCheck()) {
+               if (!isWhiteKingCheck(false)) {
                   movingPlaces.push("c1");
                }
                whiteKingPosition = "d1";
@@ -532,11 +539,11 @@ function getKingMoves(position, coin, flag) {
             && blackRookMovementAtH8 == 0) {
             blackKingPosition = "f8"
 
-            if (!isBlackKingCheck()) {
+            if (!isBlackKingCheck(false)) {
 
                blackKingPosition = "g8";
 
-               if (!isBlackKingCheck()) {
+               if (!isBlackKingCheck(false)) {
                   movingPlaces.push("g8");
                }
                blackKingPosition = "f8";
@@ -553,11 +560,11 @@ function getKingMoves(position, coin, flag) {
             && blackRookMovementAtA8 == 0) {
             blackKingPosition = "d8"
 
-            if (!isBlackKingCheck()) {
+            if (!isBlackKingCheck(false)) {
 
                blackKingPosition = "c8";
 
-               if (!isBlackKingCheck()) {
+               if (!isBlackKingCheck(false)) {
                   movingPlaces.push("c8");
                }
                blackKingPosition = "d8";
@@ -606,7 +613,7 @@ function getBishopMoves(position, coin, flag) {
             document.getElementById(position).name = "";
             document.getElementById(toPosition).name = coin;
 
-            if ((coin.startsWith("W") && isWhiteKingCheck()) || (coin.startsWith("B") && isBlackKingCheck())) {
+            if ((coin.startsWith("W") && isWhiteKingCheck(false)) || (coin.startsWith("B") && isBlackKingCheck(false))) {
                document.getElementById(position).name = coin;
                document.getElementById(toPosition).name = toCoin;
                if (isOppositeColourCoinHere(coin, toPosition)) {
@@ -667,7 +674,7 @@ function getRookMoves(position, coin, flag) {
             document.getElementById(position).name = "";
             document.getElementById(toPosition).name = coin;
 
-            if ((coin.startsWith("W") && isWhiteKingCheck()) || (coin.startsWith("B") && isBlackKingCheck())) {
+            if ((coin.startsWith("W") && isWhiteKingCheck(false)) || (coin.startsWith("B") && isBlackKingCheck(false))) {
                document.getElementById(position).name = coin;
                document.getElementById(toPosition).name = toCoin;
                if (isOppositeColourCoinHere(coin, toPosition)) {
@@ -733,7 +740,7 @@ function getKnightMoves(position, coin, flag) {
 
 
 
-            if ((coin.startsWith("W") && !isWhiteKingCheck()) || (coin.startsWith("B") && !isBlackKingCheck())) {
+            if ((coin.startsWith("W") && !isWhiteKingCheck(false)) || (coin.startsWith("B") && !isBlackKingCheck(false))) {
                movingPlaces.push(toPosition);
             }
 
@@ -774,34 +781,47 @@ function isOppositeColourCoinHere(coin, toPosition) {
 }
 
 
-function isWhiteKingCheck() {
+function isWhiteKingCheck(flag) {
+
+   var output = false;
 
    for (var i = 0; i < allPositions.length; i++) {
       var coin = document.getElementById(allPositions[i]).getAttribute("name");
 
 
       if (coin.startsWith("B") && listContainsVariable(getMoves(allPositions[i], coin, false), whiteKingPosition)) {
-         return true;
+         output = true;
+
+         if (flag) {
+            document.getElementById(allPositions[i]).style.backgroundColor = 'pink';
+            attackingCoinPositions.push(allPositions[i]);
+         }
       }
 
    }
 
-   return false;
+   return output;
 }
 
-function isBlackKingCheck() {
+function isBlackKingCheck(flag) {
+
+   var output = false;
 
    for (var i = 0; i < allPositions.length; i++) {
       var coin = document.getElementById(allPositions[i]).getAttribute("name");
 
 
       if (coin.startsWith("W") && listContainsVariable(getMoves(allPositions[i], coin, false), blackKingPosition)) {
-         return true;
+         output = true;
+         if (flag) {
+            document.getElementById(allPositions[i]).style.backgroundColor = 'pink';
+            attackingCoinPositions.push(allPositions[i]);
+         }
       }
 
    }
 
-   return false;
+   return output;
 }
 
 function listContainsVariable(list, variable) {
@@ -978,14 +998,23 @@ function checkStatus(lastMovedCoin) {
    if (checkPosition != "") {
       document.getElementById(checkPosition).style.backgroundColor = '';
       checkPosition = "";
+
+
+      for (var i = 0; i < attackingCoinPositions.length; i++) {
+         document.getElementById(attackingCoinPositions[i]).style.backgroundColor = '';
+      }
+
+      attackingCoinPositions = [];
+
+
    }
 
    if (lastMovedCoin.startsWith("W")) {
 
-     
 
-      if (!isBlackKingCheck()) {
-        
+
+      if (!isBlackKingCheck(true)) {
+
 
          if (isBlackKingStaleMate()) {
             alert("Stalemate");
@@ -1007,10 +1036,10 @@ function checkStatus(lastMovedCoin) {
    }
 
 
-    if (lastMovedCoin.startsWith("B")) {
+   if (lastMovedCoin.startsWith("B")) {
 
-      if (!isWhiteKingCheck()) {
-       
+      if (!isWhiteKingCheck(true)) {
+
          if (isWhiteKingStaleMate()) {
             alert("Stalemate");
             location.reload();
