@@ -51,7 +51,9 @@ function selectBox(position) {
 
             if (moves.length > 0) {
 
-               document.getElementById(position).style.backgroundColor = 'violet';
+               if (position != checkPosition) {
+                  document.getElementById(position).style.backgroundColor = 'violet';
+               }
                for (var i = 0; i < moves.length; i++) {
                   document.getElementById(moves[i]).style.backgroundColor = 'green';
                }
@@ -75,10 +77,11 @@ function selectBox(position) {
 }
 
 
-
-
 function clearLight() {
-   document.getElementById(lastSelectPosition).style.backgroundColor = '';
+
+   if (lastSelectPosition != checkPosition) {
+      document.getElementById(lastSelectPosition).style.backgroundColor = '';
+   }
    for (var i = 0; i < lastSelecMoves.length; i++) {
       document.getElementById(lastSelecMoves[i]).style.backgroundColor = '';
    }
