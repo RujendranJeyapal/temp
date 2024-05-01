@@ -1,5 +1,6 @@
 
 var lastSelecMoves = [];
+var storage = [];
 var attackingCoinPositions = [];
 var isWhiteMove = true;
 var isBlackMove = false;
@@ -19,6 +20,24 @@ var blackRookMovementAtH8 = 0;
 
 var checkPosition = "";
 
+
+function Rewind(fromPosition, fromCoin, fromCoinName, toPosition, toCoin, toCoinName) {
+   this.fromPosition = fromPosition;
+   this.fromCoin = fromCoin;
+   this.fromCoinName = fromCoinName;
+   this.toPosition = toPosition;
+   this.toCoin = toCoin;
+   this.toCoinName = toCoinName;
+   this.setCheckPosi = function (checkPosi) { this.checkPosi = checkPosi; };
+   this.setAttackingCoinPositions = function (attakingCoinPosi) { this.attakingCoinPosi = attakingCoinPosi; };
+
+
+
+
+}
+
+
+
 var isPawnPromotionSelection = false;
 
 var allPositions = ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
@@ -30,6 +49,163 @@ var allPositions = ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
    "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
    "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"
 ];
+
+
+
+function undo() {
+   if (storage.length != 0 && !isPawnPromotionSelection) {
+      if (lastSelecMoves.length != 0) {
+         document.getElementById(lastSelectPosition).style.backgroundColor = '';
+
+         for (var i = 0; i < lastSelecMoves.length; i++) {
+            document.getElementById(lastSelecMoves[i]).style.backgroundColor = '';
+         }
+      }
+
+
+
+      var lastMove = storage.pop();
+
+      if (lastMove.checkPosi != "") {
+         document.getElementById(lastMove.checkPosi).style.backgroundColor = '';
+         checkPosition = "";
+
+
+         for (var i = 0; i < lastMove.attakingCoinPosi.length; i++) {
+            document.getElementById(lastMove.attakingCoinPosi[i]).style.backgroundColor = '';
+         }
+
+         attackingCoinPositions = [];
+
+
+      }
+
+      var fromPosition = lastMove.fromPosition;
+
+      document.getElementById(fromPosition).innerHTML = lastMove.fromCoin;
+      document.getElementById(fromPosition).name = lastMove.fromCoinName;
+
+      var toPosition = lastMove.toPosition;
+
+      document.getElementById(toPosition).innerHTML = lastMove.toCoin;
+      document.getElementById(toPosition).name = lastMove.toCoinName;
+
+      if (lastMove.fromCoinName == "W_R") {
+         if (fromPosition == 'a1') {
+            whiteRookMovementAtA1--;
+         }
+         if (fromPosition == 'h1') {
+            whiteRookMovementAtH1--;
+         }
+      }
+
+      if (lastMove.fromCoinName == "B_R") {
+         if (fromPosition == 'a8') {
+            blackRookMovementAtA8--;
+         }
+         if (fromPosition == 'h8') {
+            blackRookMovementAtH8--;
+         }
+
+
+      }
+
+      if (lastMove.fromCoinName == "W_K") {
+         whiteKingPosition = fromPosition;
+         whiteKingMovement--;
+
+         if (fromPosition == "e1") {
+            if (toPosition == "g1") {
+
+               var whiteRook = document.getElementById("f1").innerHTML
+
+               document.getElementById("f1").innerHTML = '';
+               document.getElementById("f1").name = "";
+
+               document.getElementById("h1").innerHTML = whiteRook;
+               document.getElementById("h1").name = "W_R";
+               whiteRookMovementAtH1--;
+            }
+            if (toPosition == "c1") {
+
+               var whiteRook = document.getElementById("d1").innerHTML
+
+               document.getElementById("d1").innerHTML = '';
+               document.getElementById("d1").name = "";
+
+               document.getElementById("a1").innerHTML = whiteRook;
+               document.getElementById("a1").name = "W_R";
+               whiteRookMovementAtA1--;
+            }
+
+         }
+
+
+
+
+      }
+
+
+      if (lastMove.fromCoinName == "B_K") {
+         blackKingPosition = fromPosition;
+         blackKingMovement--;
+
+         if (fromPosition == "e8") {
+            if (toPosition == "g8") {
+
+               var blackRook = document.getElementById("f8").innerHTML
+
+               document.getElementById("f8").innerHTML = '';
+               document.getElementById("f8").name = "";
+
+               document.getElementById("h8").innerHTML = blackRook;
+               document.getElementById("h8").name = "B_R";
+               blackRookMovementAtH8--;
+            }
+            if (toPosition == "c8") {
+
+               var blackRook = document.getElementById("d8").innerHTML
+
+               document.getElementById("d8").innerHTML = '';
+               document.getElementById("d8").name = "";
+
+               document.getElementById("a8").innerHTML = blackRook;
+               document.getElementById("a8").name = "B_R";
+               blackRookMovementAtA8--;
+            }
+
+         }
+
+
+
+
+      }
+
+      isWhiteMove = !isWhiteMove;
+      isBlackMove = !isBlackMove;
+
+      if (storage.length != 0) {
+         var lasMove = storage[storage.length - 1];
+
+
+         if (lasMove.checkPosi != "") {
+            document.getElementById(lasMove.checkPosi).style.backgroundColor = 'red';
+            checkPosition = lasMove.checkPosi;
+
+
+            for (var i = 0; i < lasMove.attakingCoinPosi.length; i++) {
+               document.getElementById(lasMove.attakingCoinPosi[i]).style.backgroundColor = 'pink';
+            }
+
+            attackingCoinPositions = lasMove.attakingCoinPosi;
+
+
+         }
+      }
+
+   }
+}
+
 
 function selectBox(position) {
 
@@ -106,9 +282,12 @@ function moveCoins(toPosition) {
       document.getElementById(lastSelectPosition).innerHTML = '';
       document.getElementById(lastSelectPosition).name = "";
 
+      var move = new Rewind(lastSelectPosition, piece, coin, toPosition, document.getElementById(toPosition).innerHTML, document.getElementById(toPosition).name);
 
       document.getElementById(toPosition).innerHTML = piece;
       document.getElementById(toPosition).name = coin;
+
+
 
 
 
@@ -199,6 +378,10 @@ function moveCoins(toPosition) {
       lastSelectPosition = "";
 
       checkStatus(coin);
+
+      move.setCheckPosi(checkPosition);
+      move.setAttackingCoinPositions(attackingCoinPositions);
+      storage.push(move);
    }
 
 
@@ -931,6 +1114,7 @@ function showBlackPawnpromotionBox(toPosition) {
    div.appendChild(knight);
 
    document.getElementById("fullboard").style.filter = 'blur(10px)';
+   document.getElementById("rewind").style.filter = 'blur(10px)';
 
 }
 
@@ -973,15 +1157,22 @@ function showWhitePawnpromotionBox(toPosition) {
    div.appendChild(knight);
 
    document.getElementById("fullboard").style.filter = 'blur(10px)';
+   document.getElementById("rewind").style.filter = 'blur(10px)';
 }
 
 function givePromotion(toPosition, coin) {
+
+
+   var move = new Rewind(lastSelectPosition, document.getElementById(lastSelectPosition).innerHTML, document.getElementById(lastSelectPosition).name, toPosition, document.getElementById(toPosition).innerHTML, document.getElementById(toPosition).name);
+
+
    document.getElementById(lastSelectPosition).innerHTML = '';
    document.getElementById(lastSelectPosition).name = "";
    document.getElementById(toPosition).name = coin;
    document.getElementById(toPosition).innerHTML = document.getElementById(coin).innerHTML;
    isPawnPromotionSelection = false;
    document.getElementById("fullboard").style.filter = '';
+   document.getElementById("rewind").style.filter = '';
    document.getElementById("promotion").remove();
    isWhiteMove = !isWhiteMove;
    isBlackMove = !isBlackMove;
@@ -990,6 +1181,10 @@ function givePromotion(toPosition, coin) {
    lastSelectPosition = "";
 
    checkStatus(coin);
+
+   move.setCheckPosi(checkPosition);
+   move.setAttackingCoinPositions(attackingCoinPositions);
+   storage.push(move);
 }
 
 function checkStatus(lastMovedCoin) {

@@ -30,6 +30,21 @@ button:hover {
 
 }
 
+#rewind
+{
+	border: 1px solid green;
+	width: 4cm;
+	height: 1.25cm;
+	margin-left: 250px;
+    background-color: rgb(226, 230, 231);
+	transition: all;
+}
+
+#rewind:hover {
+	background-color: grey;
+	color:red;
+}
+
 
 h1 {
 	color: red;
